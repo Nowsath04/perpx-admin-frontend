@@ -1,0 +1,77 @@
+.card{
+    display: flex;
+    width: 240px;
+    height: 290px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 6px;
+}
+.blog_content{
+    height: 34px;overflow: hidden;
+    margin-bottom: 10px;
+}
+.card_container>img{
+    width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card_container >h3{
+    font-size: 16px;
+    height: 40px;
+    overflow: hidden;
+    line-height: 19px;
+    
+}
+.card_container >.blog_content > p{
+    font-size: 14px;
+  line-height: 16px;
+}
+.button_section{
+    display: flex;
+    gap: 2px;
+}
+.button_section>button{
+   width: 50px;
+   padding: 2px;
+}
+.button_section >:nth-of-type(1){
+    color: white;
+   border: none;
+   outline: none;
+background-color: rgb(32, 49, 227);
+}
+.button_section >button >a{
+    text-decoration: none;
+    color: white;
+}
+.button_section >:nth-of-type(2){
+  
+    background-color: green;
+    border: none;
+    outline: none;
+
+}
+.button_section >:nth-of-type(3){
+    border: none;
+    outline: none;
+    background-color: rgb(255, 71, 47);
+}
+.button_section >:nth-of-type(1):hover{
+    outline: 1px solid blue;
+}
+
+@media screen and (max-width: 480px){
+    .card{
+        width: 200px;
+        height: 250px;
+    }
+    .blog_content{
+        height: 30px;overflow: hidden;
+        margin-bottom: 10px;
+    }
+    .card_container>img{
+        width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+}

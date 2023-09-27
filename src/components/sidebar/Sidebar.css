@@ -1,0 +1,82 @@
+.sidebar {
+    top: 0;
+    width: 250px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: all .7s;
+    height: 300vh;
+}
+
+.sidebar_head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+.sidebar_heading {
+    margin-top: 31px;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.sidebar_head>.icon {
+
+    font-size: 25px;
+    color: black;
+    margin-top: 31px;
+}
+
+.sidebar_heading_icon {
+    position: absolute;
+    right: -12px;
+    top: 25px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+    z-index: 1000;
+    border: 1px solid black;
+}
+
+.sidebar_center {
+    width: 100%;
+}
+
+.sidebar_center {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.sidebar_center>a {
+    text-decoration: none;
+}
+
+.sidebar_center_content {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    padding-left: 20px;
+    color: black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    font-weight: 500;
+}
+
+.sidebar_center_content>.icon {
+    font-size: 25px;
+}
+
+.sidebar_center_content>a {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar_center_content:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

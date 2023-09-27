@@ -1,0 +1,1 @@
+var UFSync;(function(n){function t(){var t=i("SETSYNC"),n;t=="1"&&(sj_cook.clear("SETSYNC"),n=sj_gx(),n.open("GET","bingufsync",!0),n.send())}function i(n){var t=sj_cook.get(n),i;return t?(i=t.split("="),i[1]):null}n.Init=t})(UFSync||(UFSync={})),function(){UFSync.Init()}()
