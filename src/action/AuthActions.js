@@ -2,7 +2,7 @@ import axios from "axios"
 import { AuthError, AuthRegister, AuthRequest, Authsuccess, LoadinUserError, LoadingUserRequest, LoadingUserSucccess, RegisterError, RegisterRequest, UserLogoutError, UserLogoutsuccess, clearError } from "../slices/authSlices"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
-const baseurl = "http://localhost:4000/api"
+const baseurl = "https://raiden-be.onrender.com/api"
 
 export const login = (data1) => async (dispatch) => {
 
