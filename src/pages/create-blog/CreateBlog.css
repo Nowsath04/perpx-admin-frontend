@@ -22,10 +22,10 @@
 }
 
 .input_section>form>label>img {
-    width: 400px;
-    height: 300px;
-    object-fit: cover;
     border-radius: 5px;
+    height: 300px;
+    object-fit: contain;
+    width: 400px;
 }
 
 .buttons {
