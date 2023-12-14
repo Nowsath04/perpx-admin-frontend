@@ -174,7 +174,6 @@ const EditBlog = () => {
               value={values}
               onChange={handleChange}
             />
-
             <div className="buttons">
               <input
                 type="submit"
@@ -200,7 +199,7 @@ EditBlog.modules = {
       { list: "bullet" },
       { indent: "-1" },
       { indent: "+1" },
-      
+
     ],
     ["link", "image", "video"],
     ["clean"],
