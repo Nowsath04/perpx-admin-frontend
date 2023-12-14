@@ -2,7 +2,6 @@ import React from 'react'
 import "./Crad.css"
 import blogimg from "../../image/OIP (3).jpg"
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { BsArrowRight } from "react-icons/bs";
 import { useDispatch } from 'react-redux';
 import { DeleteSingleBlog } from '../../action/BlogAction';
 const Card = ({ val, }) => {
