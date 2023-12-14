@@ -10,3 +10,20 @@
 body {
   background: #0B0612;
 }
+
+
+@media screen and (max-width: 1149px) {
+
+  .buttons>input {
+    margin-top: 20px;
+  }
+
+}
+
+@media screen and (max-width: 702px) {
+
+  .buttons>input {
+    margin-top: 40px;
+  }
+
+}
