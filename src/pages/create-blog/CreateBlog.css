@@ -24,7 +24,7 @@
 .input_section>form>label>img {
     border-radius: 5px;
     height: 300px;
-    object-fit: contain;
+    object-fit: cover;
     width: 400px;
 }
 
