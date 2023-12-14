@@ -14,14 +14,14 @@ const Sidebar = () => {
     >
       <div className="sidebar_head">
         <MdOutlineAdminPanelSettings className="icon" />
-        <h3 className="sidebar_heading" style={{ display: `${sidebarActive ? "flex" : "none"}`,overflow:"hidden" }} >Raiden_Admin</h3>
+        <h3 className="sidebar_heading" style={{ display: `${sidebarActive ? "flex" : "none"}`,overflow:"hidden" }} >PerpX_Admin</h3>
         <FaAngleRight
           className="sidebar_heading_icon"
           style={{ transform: `${sidebarActive ? "" : "rotate(180deg)"}` }}
           onClick={() => setsidebarActive(!sidebarActive)}
         />
       </div>
-      <hr></hr>
+      {/* <hr style={{background:"#545454"}}></hr> */}
       <div className="sidebar_center">
         <Link  to={"/allblogs"} className="sidebar_center_content">
           <FaBloggerB className="icon" />

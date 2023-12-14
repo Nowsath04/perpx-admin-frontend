@@ -34,7 +34,6 @@ function App() {
           <Route path='/editprofile' element={<EditProfile/>} />
         </Routes>
       </BrowserRouter>     
-
     </div>
   );
 }

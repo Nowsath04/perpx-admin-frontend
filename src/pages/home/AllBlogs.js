@@ -3,18 +3,22 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import NavBar from '../../components/navbar/NavBar'
 import Card from '../../components/cards/Card'
 import "./home.css"
-import { Allblogs } from '../../action/BlogAction'
+import { Allblogs, } from '../../action/BlogAction'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactPaginate from 'react-paginate'
 const AllBlogs = () => {
 const [pageNumber,setPageNumber]=useState(0)
   const {allBlog,loading}=useSelector((state)=>state.blog)
   const dispatch = useDispatch()
+console.log(allBlog);
 
 
   useEffect(() => {
     dispatch(Allblogs)
+    
   }, [])
+
+
 
   const userPerPage=8
   const pageVisited=pageNumber*userPerPage
@@ -34,7 +38,7 @@ setPageNumber(selected)
         <NavBar />
         <div className='Card_section'>
          {
-         allBlog? displayUsers :"loading..."
+        loading?"Loading....":  allBlog? displayUsers: allBlog
         
          }
         { allBlog?<ReactPaginate

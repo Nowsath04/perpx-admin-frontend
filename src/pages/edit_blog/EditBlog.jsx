@@ -7,12 +7,15 @@ import NavBar from '../../components/navbar/NavBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GetsingleBlog, UpdateBlogs } from '../../action/BlogAction';
+import { toast } from 'react-toastify'
+
 const EditBlog = () => {
 
   const { Singleblog, loading } = useSelector((state) => state.blog)
-  console.log(Singleblog);
+
+  const navigator = useNavigate()
 
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
@@ -48,7 +51,7 @@ const EditBlog = () => {
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("mainheading", heading);
@@ -61,8 +64,14 @@ const EditBlog = () => {
     formData.append("image", image);
     formData.append("category", selectedOption);
     console.log(...formData);
-   
-      dispatch(UpdateBlogs(params.id,formData));
+
+    try {
+      await dispatch(UpdateBlogs(params.id, formData));
+      navigator('/allblogs'); // Use React Router to navigate without a full page reload
+    } catch (error) {
+      console.error('Error updating new blog:', error);
+    }
+
     //const res=axios.post("http://localhost:4000/api/blog/newblog",formData,{ withCredentials: true })
   };
 
@@ -79,6 +88,7 @@ const EditBlog = () => {
       setValue(Singleblog.content)
     }
   }, [Singleblog])
+
   return (
     <div className="home" style={{ display: "flex", width: "100%" }}>
       <Sidebar />
@@ -86,73 +96,71 @@ const EditBlog = () => {
         <NavBar />
         <div className="input_section">
           <form onSubmit={handleSubmit} className="form_input">
-            {<img src={image ? defaultImage : defaultImage} alt="" />}
-            <input type="file" onChange={handleImage} name="image" />
+          <div className="Input_title_2">Select a Blog Image</div>
+            <label htmlFor="image" className="custom-file-input">
+              {<img src={image ? defaultImage : defaultImage} alt="" />}
+            </label>
+            <input type="file" onChange={handleImage} name="image" id="image" style={{ display: 'none' }} />
             <div className="input_option">
-              <select value={selectedOption} onChange={handleOptionChange}>
+              <div className="Input_title">Category</div>
+              <select className="select_input" value={selectedOption} onChange={handleOptionChange}>
                 <option value="">Select page</option>
-                <option value="Metaverse Consulting Services">
-                  Metaverse Consulting Services
+                <option value="DeFi">
+                  DeFi
                 </option>
-                <option value="Metaverse Game Development">
-                  Metaverse Game Development
+                <option value="Web3">
+                  Web3
                 </option>
-                <option value="Metaverse Integration Services">
-                  Metaverse Integration Services
-                </option>
-                <option value="Metaverse 3D Artist Services">
-                  Metaverse 3D Artist Services
-                </option>
-                <option value="Metaverse Digital Twin And Simulations">
-                  Metaverse Digital Twin And Simulations
-                </option>
-                <option value="Metaverse Application Development">
-                  Metaverse Application Development
-                </option>
-                <option value="Metaverse Digital Economics(NFT Blockchain)">
-                  Metaverse Digital Economics(NFT Blockchain)
-                </option>
-                <option value="Metaverse Streaming Services">
-                  Metaverse Streaming Services
-                </option>
-                <option value="MAAS (Metaverse As A Services)">
-                  MAAS (Metaverse As A Services)
+                <option value="Web">
+                  Web
                 </option>
               </select>
               <div className="main_content">
+                <div className="Input_title_2">Blog Title</div>
                 <input
+                  className="blog_input"
                   type="text"
-                  placeholder="Enter The Heading"
+                  // placeholder="Enter The Heading"
                   value={heading}
                   onChange={(e) => setHeading(e.target.value)}
                 />
+                <div className="Input_title_2">URL</div>
                 <input
+                  className="blog_input"
                   type="text"
-                  placeholder="Enter the uniqueurl "
+                  // placeholder="Enter the uniqueurl "
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                 />
+                <div className="Input_title_2">Meta Title</div>
                 <input
+                  className="blog_input"
                   type="text"
-                  placeholder="Enter the meta_title"
+                  // placeholder="Enter the meta_title"
                   value={metaTitle}
                   onChange={(e) => setMetaTitle(e.target.value)}
                 />
+                <div className="Input_title_2">Meta Description</div>
                 <input
+                  className="blog_input"
                   type="text"
-                  placeholder="Enter The meta_description"
+                  // placeholder="Enter The meta_description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
+                <div className="Input_title_2">Meta Keyword</div>
                 <input
+                  className="blog_input"
                   type="text"
-                  placeholder="Enter The meta_keywords"
+                  // placeholder="Enter The meta_keywords"
                   value={metaKeyWord}
                   onChange={(e) => setMetaKeyWord(e.target.value)}
                 />
+                <div className="Input_title_2">Content</div>
                 <textarea
+                className="Text_area"
                   type="text"
-                  placeholder="Enter some Content..."
+                  // placeholder="Enter some Content..."
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 />
@@ -171,13 +179,7 @@ const EditBlog = () => {
               <input
                 type="submit"
                 value={"submit"}
-                style={{
-                  color: "white",
-                  backgroundColor: "red",
-                  padding: "5px 10px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
+                className="create_blog_button"
               />
             </div>
           </form>

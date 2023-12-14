@@ -2,7 +2,8 @@ import axios from "axios"
 import { AuthError, AuthRegister, AuthRequest, Authsuccess, LoadinUserError, LoadingUserRequest, LoadingUserSucccess, RegisterError, RegisterRequest, UserLogoutError, UserLogoutsuccess, clearError } from "../slices/authSlices"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
-const baseurl = "https://raiden-be.onrender.com/api"
+// const baseurl = "https://raiden-be.onrender.com/api"
+const baseurl= "http://localhost:4000/api"
 
 export const login = (data1) => async (dispatch) => {
 
@@ -11,7 +12,6 @@ export const login = (data1) => async (dispatch) => {
         const { data } = await axios.post(`${baseurl}/auth/login`, data1,{ withCredentials: true })
         dispatch(Authsuccess(data))
         toast.success("login successfull")
-
     } catch (error) {
         dispatch(AuthError(error.response.data.message))
     }

@@ -1,8 +1,10 @@
 import axios from "axios"
-import { AllblogLoading, AllblogSuccess, Allblogfail, GetSingleblogLoading, GetSingleblogSuccess, GetSingleblogfail, UpdateblogCreateLoading, UpdateblogCreateSuccess, blogCreateLoading, blogCreateSuccess, blogCreatefail } from "../slices/blogSlices"
+import { AllblogLoading, AllblogSuccess, Allblogfail, GetSingleblogLoading, GetSingleblogSuccess, GetSingleblogfail, UpdateblogCreateLoading, UpdateblogCreateSuccess, blogCreateLoading, blogCreateSuccess, blogCreatefail,DeleteBlogLoading,DeleteBlogSuccess,DeleteBlogFail } from "../slices/blogSlices"
 import { toast } from "react-toastify"
 
-const baseurl = "https://raiden-be.onrender.com/api"
+// const baseurl = "https://raiden-be.onrender.com/api"
+const baseurl= "http://localhost:4000/api"
+
 export const CreateNewBlogs = (blogdata) => async (dispatch) => {
 
     try {
@@ -50,11 +52,28 @@ export const UpdateBlogs = (id,blogdata) => async (dispatch) => {
         dispatch(UpdateblogCreateLoading())
         const { data } = await axios.put(`${baseurl}/blog/single-blog/${id}`, blogdata, { withCredentials: true })
         dispatch(UpdateblogCreateSuccess(data))
-        toast.success("blog created successfully", {
+        toast.success("blog updated", {
             position: (toast.POSITION.BOTTOM_CENTER)
         })
     } catch (error) {
         dispatch(blogCreatefail(error.response.data.message))
+        toast.error(error.response.data.message, {
+            position: (toast.POSITION.BOTTOM_CENTER)
+        })
+    }
+}
+
+export const DeleteSingleBlog = (id) => async (dispatch) => {
+
+    try {
+        dispatch(DeleteBlogLoading())
+        const { data } = await axios.delete(`${baseurl}/blog/single-blog/${id}`, { withCredentials: true })
+        dispatch(DeleteBlogSuccess(data))
+        toast.success("Deleted", {
+            position: (toast.POSITION.BOTTOM_CENTER)
+        })
+    } catch (error) {
+        dispatch(DeleteBlogFail(error.response.data.message))
         toast.error(error.response.data.message, {
             position: (toast.POSITION.BOTTOM_CENTER)
         })

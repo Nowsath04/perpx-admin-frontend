@@ -16,7 +16,6 @@ const Login = () => {
     e.preventDefault();
     console.log(data);
     dispatch(login(data))
-  
   };
   useEffect(()=>{
     if (isAuthentication) {
@@ -49,7 +48,7 @@ const Login = () => {
               onChange={handleChange}
             />
             <input
-              type="text"
+              type="password"
               name="password"
               value={data.password}
               placeholder="Enter Your Password"
@@ -59,7 +58,7 @@ const Login = () => {
           </form>
         </div>
         <div className="login_bttom">
-          If you Don't have account pls<Link to={"/register"}>register</Link>
+          {/* If you Don't have account pls<Link to={"/register"}>register</Link> */}
         </div>
       </div>
     </div>

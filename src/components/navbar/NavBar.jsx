@@ -32,14 +32,15 @@ navigater("/")
           <div className="nav_dropdown_box"></div>
           <ul>
             <li onClick={() => setdropdown(false)}>
-              <Link to={"/myprofile"}>My Profile</Link>
+              <Link>My Profile</Link>
+              {/* to={"/myprofile"} */}
             </li>
-            <li onClick={() => setdropdown(false)}>
+            {/* <li onClick={() => setdropdown(false)}>
               <Link to={"/editprofile"}>Edit Profile</Link>
-            </li>
+            </li> */}
             <hr style={{ width: "100%" }} />
             <li onClick={() => setdropdown(false)}>
-              <button style={{backgroundColor:"red" ,padding:"5px 10px",color:"white",borderRadius:"3px",border:"none",outline:"none",cursor:"pointer"}} onClick={handleclick}>Logout</button>
+              <button className="Logout_btn" onClick={handleclick}>Logout</button>
             </li>
           </ul>
         </div>

@@ -1,37 +1,47 @@
-
-.Card_section{
- padding: 30px;
- display: flex;
- flex-wrap: wrap;
- width: 100%;
- gap: 40px;
+.Card_section {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 40px;
 
 }
-.paginationBtns{
+
+.paginationBtns {
     width: 80%;
     height: 40px;
     list-style: none;
     display: flex;
     justify-content: center;
 }
-.paginationBtns a{
+
+.paginationBtns a {
     padding: 10px;
     margin: 8px;
     border-radius: 5px;
-    border: 1px solid black;
-    color: black;
+    border: 1px solid white;
+    color: white;
     cursor: pointer;
 }
-.paginationBtns a:hover{
+
+
+.paginationBtns a:hover {
+    color: black;
+    background: white;
+}
+
+.paginationActive a {
+    color: black;
+    background-color: white;
+}
+
+.paginationActive a:hover {
     color: white;
     background-color: black;
 }
-.paginationActive a{
-color: white;
-background-color:black ;
-}
-@media screen and (max-width: 480px){
-    .Card_section{
+
+@media screen and (max-width: 480px) {
+    .Card_section {
         padding: 10px;
     }
 }

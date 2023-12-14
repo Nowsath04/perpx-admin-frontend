@@ -45,35 +45,41 @@
     gap: 10px;
     height: 180px;
 }
-.register_middle>form >input{
+
+.register_middle>form>input {
     height: 32px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border: none;
     outline: none;
     padding-left: 10px;
 }
-.register_middle>form >input:hover{
+
+.register_middle>form>input:hover {
     outline: 1px solid red;
 }
-#button{
+
+#button {
     background-color: red;
     color: white;
     font-size: 15px;
     border-radius: 5px;
     cursor: pointer;
 }
-#button:hover{
+
+#button:hover {
     background-color: white;
-    color: red;
+    color: white;
 }
-.register_bttom>a{
-display: block;
-padding: 10px;
-font-size: 15px;
-text-decoration: none;
+
+.register_bttom>a {
+    display: block;
+    padding: 10px;
+    font-size: 15px;
+    text-decoration: none;
 }
-.register_bttom{
+
+.register_bttom {
     font-size: 12px;
-    display:  flex;
+    display: flex;
     align-items: center;
 }

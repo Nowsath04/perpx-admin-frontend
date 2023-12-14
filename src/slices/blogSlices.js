@@ -56,7 +56,7 @@ const blogSlice = createSlice({
         GetSingleblogSuccess(state, action) {
             return {
                 loading: false,
-                Singleblog: action.payload.singleBlog[0],
+                Singleblog: action.payload.singleBlog,
             }
         },
         GetSingleblogfail(state, action) {
@@ -89,6 +89,29 @@ const blogSlice = createSlice({
             }
         },
 
+        DeleteBlogLoading(state, action) {
+            return {
+
+                loading: true
+            }
+        },
+        DeleteBlogSuccess(state, action) {
+            return {
+                loading: false,
+                blog: action.payload.blog,
+
+
+            }
+        },
+        DeleteBlogFail(state, action) {
+            return {
+                loading: false,
+                error: action.payload,
+
+            }
+        },
+        
+
     }
 })
 
@@ -96,6 +119,6 @@ const { actions, reducer } = blogSlice
 
 export const { blogCreateLoading, blogCreateSuccess, blogCreatefail, AllblogLoading,
      AllblogSuccess, Allblogfail, GetSingleblogLoading, GetSingleblogSuccess,
-      GetSingleblogfail,UpdateblogCreateLoading,UpdateblogCreateSuccess,UpdateblogCreatefail } = actions
+      GetSingleblogfail,UpdateblogCreateLoading,UpdateblogCreateSuccess,UpdateblogCreatefail,DeleteBlogLoading,DeleteBlogSuccess,DeleteBlogFail } = actions
 
 export default reducer

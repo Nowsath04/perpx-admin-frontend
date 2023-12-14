@@ -11,12 +11,12 @@
 .login_container {
     display: flex;
     flex-direction: column;
-    padding: 10px 20px;
+    padding: 30px 20px;
     width: 300px;
-    height: 400px;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     align-items: center;
+    background: white;
 }
 
 .login_middle>form {
@@ -32,6 +32,9 @@
 .login_title {
     font-size: 25px;
     padding: 5px;
+    color: black;
+    background: white;
+    font-family: Poppins;
 }
 
 .login_middle {
@@ -41,40 +44,41 @@
 
 .login_middle>form {
     display: flex;
-    gap: 10px;
-
+    gap: 20px;
+    background: white;
 }
 
 .login_middle>form>input {
     height: 32px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
     border: none;
     outline: none;
     padding-left: 10px;
+    background: transparent;
 }
 
 .login_middle>form>input:hover {
-    outline: 1px solid red;
+    outline: 1px solid #730C9C;
 }
 
 #button {
-    background-color: red;
+    font-family: Poppins;
+    background: linear-gradient(96.57deg, #730C9C 0%, #016994 100%);
     color: white;
     font-size: 15px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-#button:hover {
-    background-color: white;
-    color: red;
-}
+#button:hover {}
 
 .login_bttom>a {
     display: block;
     padding: 10px;
     font-size: 15px;
     text-decoration: none;
+    background-color: white;
+
 }
 
 .login_bttom>a:hover {
@@ -85,4 +89,5 @@
     font-size: 12px;
     display: flex;
     align-items: center;
+    background-color: white;
 }
