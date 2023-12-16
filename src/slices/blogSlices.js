@@ -77,8 +77,6 @@ const blogSlice = createSlice({
             return {
                 loading: false,
                 blog: action.payload.blog,
-
-
             }
         },
         UpdateblogCreatefail(state, action) {
@@ -99,8 +97,6 @@ const blogSlice = createSlice({
             return {
                 loading: false,
                 blog: action.payload.blog,
-
-
             }
         },
         DeleteBlogFail(state, action) {

@@ -1,22 +1,22 @@
+
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
 import NavBar from '../../components/navbar/NavBar'
 import Card from '../../components/cards/Card'
-import "./home.css"
-import { Allblogs, } from '../../action/BlogAction'
+// import "./home.css"
+import { AllPages } from '../../action/PageAction'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactPaginate from 'react-paginate'
-const AllBlogs = () => {
+import PageCard from '../../components/cards/PageCard'
+const AllPage = () => {
 const [pageNumber,setPageNumber]=useState(0)
-  const {allBlog,loading}=useSelector((state)=>state.blog)
+  const {allpage,loading}=useSelector((state)=>state.page)
   const dispatch = useDispatch()
-  
-console.log(allBlog);
 
+ console.log(allpage);
 
   useEffect(() => {
-    dispatch(Allblogs)
-    
+    dispatch(AllPages)
   }, [])
 
 
@@ -24,10 +24,10 @@ console.log(allBlog);
   const userPerPage=8
   const pageVisited=pageNumber*userPerPage
 
-  const displayUsers=allBlog ?allBlog.slice(pageVisited,pageVisited+userPerPage).map((val)=>{
-    return  <Card val={val}/>
+  const displayUsers=allpage ?allpage.slice(pageVisited,pageVisited+userPerPage).map((val)=>{
+    return  <PageCard val={val}/>
   }):""
-const pageCount=allBlog ?Math.ceil(allBlog.length/userPerPage):""
+const pageCount=allpage ?Math.ceil(allpage.length/userPerPage):""
 
 const changePage =({selected})=>{
 setPageNumber(selected)
@@ -39,10 +39,10 @@ setPageNumber(selected)
         <NavBar />
         <div className='Card_section'>
          {
-        loading?"Loading....":  allBlog? displayUsers: allBlog
+        loading?"Loading....":  allpage? displayUsers: allpage
         
          }
-        { allBlog?<ReactPaginate
+        { allpage?<ReactPaginate
          previousLabel={"Previous"}
          nextLabel={"Next"}
          pageCount={pageCount}
@@ -60,4 +60,4 @@ setPageNumber(selected)
   )
 }
 
-export default AllBlogs
+export default AllPage

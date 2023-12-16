@@ -13,6 +13,9 @@ import { LoadingUser } from './action/AuthActions';
 import ProtectRouter from './router/ProtectRouter';
 import EditProfile from './pages/edit-profile/EditProfile';
 import EditBlog from './pages/edit_blog/EditBlog';
+import CreatePage from './pages/CreatePage/CreatePage';
+import AllPage from './pages/AllPage/AllPage';
+import EditPage from './pages/edit_Page/EditPage.js';
 
 
 function App() {
@@ -27,11 +30,14 @@ function App() {
         <Routes>
           <Route path='/register' element={<Register />} />
           <Route path='/allblogs' element={<ProtectRouter><AllBlogs /></ProtectRouter>} />
+          <Route path='/allpages' element={<ProtectRouter><AllPage/></ProtectRouter>} />
           <Route path='/' element={<Login />} />
           <Route path='/create-blog' element={<ProtectRouter><CreateNewBlog/></ProtectRouter>} />
           <Route path='/myprofile' element={<ProtectRouter><MyProfile/></ProtectRouter>} />
           <Route path='/editBlog/:id' element={<ProtectRouter><EditBlog/></ProtectRouter>} />
+          <Route path='/editpage/:id' element={<ProtectRouter><EditPage/></ProtectRouter>} />
           <Route path='/editprofile' element={<EditProfile/>} />
+          <Route path='/create-page' element={<ProtectRouter><CreatePage/></ProtectRouter>} />
         </Routes>
       </BrowserRouter>     
     </div>

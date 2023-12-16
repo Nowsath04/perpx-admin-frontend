@@ -35,6 +35,18 @@ const Sidebar = () => {
             create Blog
           </Link>
         </Link>
+        <Link  to={"/create-page"} className="sidebar_center_content">
+          <FaBloggerB className="icon" />
+          <Link to={"/create-page"} style={{ display: `${sidebarActive ? "flex" : "none"}` }}>
+            Create Page
+          </Link>
+        </Link>
+        <Link  to={"/allpages"} className="sidebar_center_content">
+          <FaBloggerB className="icon" />
+          <Link to={"/allpages"} style={{ display: `${sidebarActive ? "flex" : "none"}` }}>
+            All Pages
+          </Link>
+        </Link>
       </div>
     </div>
   );

@@ -10,6 +10,8 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GetsingleBlog, UpdateBlogs } from '../../action/BlogAction';
 import { toast } from 'react-toastify'
+import uploadImg2 from "../../image/532-5320260_this-is-a-simple-example-on-how-to-removebg-preview.png";
+
 
 const EditBlog = () => {
 
@@ -20,6 +22,8 @@ const EditBlog = () => {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [defaultImage, setDefaulImage] = useState(uploadImg);
+  const [defaultImage2, setDefaulImage2] = useState(uploadImg2);
+  const [ogImage, setOgImage] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [values, setValue] = useState("");
   const [heading, setHeading] = useState("");
@@ -33,6 +37,8 @@ const EditBlog = () => {
   useEffect(() => {
     dispatch(GetsingleBlog(params.id))
   }, [])
+
+  
   const handleImage = (e) => {
     const reader = new FileReader();
 
@@ -45,6 +51,20 @@ const EditBlog = () => {
     };
     reader.readAsDataURL(e.target.files[0]);
   };
+
+  const handleOgImage = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setDefaulImage2(reader.result);
+        setOgImage(e.target.files[0]);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+
+  };
+
   const handleChange = (e) => {
     setValue(e);
   };
@@ -53,6 +73,9 @@ const EditBlog = () => {
   };
   const handleSubmit = async(e) => {
     e.preventDefault();
+    const combinedImages = [image,ogImage];
+    console.log(combinedImages);
+        
     const formData = new FormData();
     formData.append("mainheading", heading);
     formData.append("maincontent", content);
@@ -62,6 +85,7 @@ const EditBlog = () => {
     formData.append("meta_title", metaTitle);
     formData.append("url", url);
     formData.append("image", image);
+    formData.append("image", ogImage);
     formData.append("category", selectedOption);
     console.log(...formData);
 
@@ -79,6 +103,7 @@ const EditBlog = () => {
     if (Singleblog) {
       setSelectedOption(Singleblog.category)
       setDefaulImage(Singleblog.imageurl)
+      setDefaulImage2(Singleblog.ogImage)
       setHeading(Singleblog.mainheading)
       setContent(Singleblog.maincontent)
       setMetaTitle(Singleblog.meta_title)
@@ -88,6 +113,10 @@ const EditBlog = () => {
       setValue(Singleblog.content)
     }
   }, [Singleblog])
+
+  console.log(Singleblog);
+
+
 
   return (
     <div className="home" style={{ display: "flex", width: "100%" }}>
@@ -101,6 +130,11 @@ const EditBlog = () => {
               {<img src={image ? defaultImage : defaultImage} alt="" />}
             </label>
             <input type="file" onChange={handleImage} name="image" id="image" style={{ display: 'none' }} />
+            <div className="Input_title_2">Select a Og Image</div>
+            <label htmlFor="ogImage" className="custom-file-input">
+              {<img src={image ? defaultImage2 : defaultImage2} alt="" />}
+            </label>
+            <input type="file" onChange={handleOgImage} name="ogImage" id="ogImage" style={{ display: 'none' }} />
             <div className="input_option">
               <div className="Input_title">Category</div>
               <select className="select_input" value={selectedOption} onChange={handleOptionChange}>

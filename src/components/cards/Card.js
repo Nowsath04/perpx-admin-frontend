@@ -10,25 +10,6 @@ const Card = ({ val, }) => {
   const params = useParams()
   const navigate = useNavigate()
 
-  // const handleDelete = async() => {
-  //   try {
-  //     await dispatch(DeleteSingleBlog(val._id));
-  //     navigator('/allblogs');
-  //   } catch (error) {
-  //     console.error('Error updating new blog:', error);
-  //   }
-  // };
-
-
-  // const confirmDelete = (val) => {
-  //   const userConfirmed = window.confirm('Are you sure you want to delete?');
-
-  //   if (userConfirmed) {
-  //     handleDelete(val);
-  //   } else {
-  //   }
-  // };
-
   const handleDelete = async () => {
     const userConfirmed = window.confirm('Are you sure you want to delete?');
 

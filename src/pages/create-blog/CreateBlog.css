@@ -6,7 +6,6 @@
     margin: 40px;
     flex-direction: column;
     align-items: start;
-
 }
 
 .input_email {
@@ -112,7 +111,7 @@
     background: transparent;
     color: white;
     border: 1px solid #989898;
-    height: 40px;
+    height: 42px;
     outline: none;
     font-family: Poppins;
 }
@@ -124,6 +123,7 @@
     height: 30px;
     outline: none;
     font-family: Poppins;
+    padding-left: 10px !important;
 
 }
 
