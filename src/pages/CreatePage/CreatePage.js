@@ -76,6 +76,8 @@ const CreatePage = () => {
                                 <option value="Earn">Earn</option>
                                 <option value="Blog">Blog</option>
                                 <option value="Home">Home</option>
+                                <option value="termandcondition">Term And Condition</option>
+
                             </select>
                             <div className="main_content">
                                 <div className="Input_title_2">Meta Title</div>
