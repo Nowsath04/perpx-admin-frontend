@@ -3,7 +3,6 @@ import "./CreateBlog.css";
 import Sidebar from "../../components/sidebar/Sidebar";
 import NavBar from "../../components/navbar/NavBar";
 import uploadImg from "../../image/532-5320260_this-is-a-simple-example-on-how-to-removebg-preview.png";
-import uploadImg2 from "../../image/532-5320260_this-is-a-simple-example-on-how-to-removebg-preview.png";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "../../../node_modules/react-quill/dist/quill.snow.css";
@@ -77,7 +76,7 @@ const CreateNewBlog = () => {
   const handleCategory = async () => {
 
     try {
-      const { category } = await axios.post("http://localhost:4000/api/blog/create-category", { "category": selectedOption }, { withCredentials: true })
+      const { category } = await axios.post("https://perpx.onrender.com/api/blog/create-category", { "category": selectedOption }, { withCredentials: true })
 
       console.log();
 
@@ -89,7 +88,7 @@ const CreateNewBlog = () => {
   const getAllCategory = async () => {
 
     try {
-      const { data } = await axios.get("http://localhost:4000/api/blog/get-category")
+      const { data } = await axios.get("https://perpx.onrender.com/api/blog/get-category")
 
       setAllCategory(data.value)
 

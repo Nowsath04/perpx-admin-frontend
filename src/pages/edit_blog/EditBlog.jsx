@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GetsingleBlog, UpdateBlogs } from '../../action/BlogAction';
 import { toast } from 'react-toastify'
-import uploadImg2 from "../../image/532-5320260_this-is-a-simple-example-on-how-to-removebg-preview.png";
 import axios from 'axios';
 
 
@@ -105,7 +104,7 @@ const EditBlog = () => {
   const handleCategory = async () => {
 
     try {
-      const { category } = await axios.post("http://localhost:4000/api/blog/create-category", { "category": selectedOption }, { withCredentials: true })
+      const { category } = await axios.post("https://perpx.onrender.com/api/blog/create-category", { "category": selectedOption }, { withCredentials: true })
 
       console.log();
 
@@ -118,7 +117,7 @@ const EditBlog = () => {
   const getAllCategory = async () => {
 
     try {
-      const { data } = await axios.get("http://localhost:4000/api/blog/get-category")
+      const { data } = await axios.get("https://perpx.onrender.com/api/blog/get-category")
 
       setAllCategory(data.value)
 
