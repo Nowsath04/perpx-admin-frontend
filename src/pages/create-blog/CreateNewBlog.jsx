@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CreateBlog.css";
 import Sidebar from "../../components/sidebar/Sidebar";
 import NavBar from "../../components/navbar/NavBar";
@@ -10,13 +10,13 @@ import "../../../node_modules/react-quill/dist/quill.snow.css";
 import { useDispatch } from "react-redux";
 import { CreateNewBlogs } from "../../action/BlogAction";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const CreateNewBlog = () => {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
-  const [ogImage, setOgImage] = useState(null);
   const [defaultImage, setDefaulImage] = useState(uploadImg);
-  const [defaultImage2, setDefaulImage2] = useState(uploadImg2);
   const [selectedOption, setSelectedOption] = useState("");
   const [values, setValue] = useState("");
   const [heading, setHeading] = useState("");
@@ -25,8 +25,8 @@ const CreateNewBlog = () => {
   const [metaKeyWord, setMetaKeyWord] = useState("");
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
+  const [allCategory, setAllCategory] = useState([]);
   const navigator = useNavigate()
-  const [allImage, setAllImage] = useState([])
 
   const handleImage = (e) => {
     const reader = new FileReader();
@@ -41,18 +41,7 @@ const CreateNewBlog = () => {
 
   };
 
-  const handleOgImage = (e) => {
-    const reader = new FileReader();
 
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setDefaulImage2(reader.result);
-        setOgImage(e.target.files[0]);
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
-
-  };
 
   const handleChange = (e) => {
     setValue(e);
@@ -63,9 +52,6 @@ const CreateNewBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const combinedImages = [image,ogImage];
-    console.log(combinedImages);
-    e.preventDefault();
     const formData = new FormData();
     formData.append("mainheading", heading);
     formData.append("maincontent", content);
@@ -75,20 +61,50 @@ const CreateNewBlog = () => {
     formData.append("meta_title", metaTitle);
     formData.append("url", url);
     formData.append("image", image);
-    formData.append("image", ogImage);
     formData.append("category", selectedOption);
     console.log(...formData);
     //const res=axios.post("http://localhost:4000/api/blog/newblog",formData,{ withCredentials: true })
     try {
       await dispatch(CreateNewBlogs(formData));
       navigator('/allblogs'); // Use React Router to navigate without a full page reload
+      handleCategory()
     } catch (error) {
       console.error('Error creating new blog:', error);
     }
 
   }
 
-  console.log(image);
+  const handleCategory = async () => {
+
+    try {
+      const { category } = await axios.post("http://localhost:4000/api/blog/create-category", { "category": selectedOption }, { withCredentials: true })
+
+      console.log();
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+  const getAllCategory = async () => {
+
+    try {
+      const { data } = await axios.get("http://localhost:4000/api/blog/get-category")
+
+      setAllCategory(data.value)
+
+    } catch {
+
+      toast.error("Already have category")
+
+    }
+
+  }
+
+
+  useEffect(() => {
+    getAllCategory()
+  }, [])
 
   return (
     <div className="home" style={{ display: "flex", width: "100%" }}>
@@ -102,24 +118,15 @@ const CreateNewBlog = () => {
               {<img src={image ? defaultImage : defaultImage} alt="" />}
             </label>
             <input type="file" onChange={handleImage} name="image" id="image" style={{ display: 'none' }} />
-            <div className="Input_title_2">Select a Og Image</div>
-            <label htmlFor="ogImage" className="custom-file-input">
-              {<img src={image ? defaultImage2 : defaultImage2} alt="" />}
-            </label>
-            <input type="file" onChange={handleOgImage} name="ogImage" id="ogImage" style={{ display: 'none' }} />
             <div className="input_option">
               <div className="Input_title">Category</div>
               <select className="select_input" value={selectedOption} onChange={handleOptionChange}>
                 <option value="">Select page</option>
-                <option value="DeFi">
-                  DeFi
-                </option>
-                <option value="Web3">
-                  Web3
-                </option>
-                <option value="Web">
-                  Web
-                </option>
+                {
+                  allCategory.map((item) => {
+                    return <option value={item}>{item}</option>
+                  })
+                }
               </select>
               <div className="main_content">
                 {
@@ -151,7 +158,7 @@ const CreateNewBlog = () => {
                   value={heading}
                   onChange={(e) => setHeading(e.target.value)}
                 />
-                <div className="Input_title_2">URL</div>
+                <div className="Input_title_2">URL ( Uniq Url )</div>
                 <input
                   className="blog_input"
                   type="text"
@@ -183,7 +190,7 @@ const CreateNewBlog = () => {
                   value={metaKeyWord}
                   onChange={(e) => setMetaKeyWord(e.target.value)}
                 />
-                <div className="Input_title_2">Content</div>
+                <div className="Input_title_2">Blog Content</div>
                 <textarea
                   className="Text_area"
                   type="text"
@@ -193,6 +200,7 @@ const CreateNewBlog = () => {
                 />
               </div>
             </div>
+            <div className="Input_title_2">Blog details description</div>
             <ReactQuill
               className="text_area"
               placeholder="write some thing"

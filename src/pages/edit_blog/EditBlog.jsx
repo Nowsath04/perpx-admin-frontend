@@ -11,6 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { GetsingleBlog, UpdateBlogs } from '../../action/BlogAction';
 import { toast } from 'react-toastify'
 import uploadImg2 from "../../image/532-5320260_this-is-a-simple-example-on-how-to-removebg-preview.png";
+import axios from 'axios';
 
 
 const EditBlog = () => {
@@ -22,8 +23,6 @@ const EditBlog = () => {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [defaultImage, setDefaulImage] = useState(uploadImg);
-  const [defaultImage2, setDefaulImage2] = useState(uploadImg2);
-  const [ogImage, setOgImage] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [values, setValue] = useState("");
   const [heading, setHeading] = useState("");
@@ -32,6 +31,10 @@ const EditBlog = () => {
   const [metaKeyWord, setMetaKeyWord] = useState("");
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
+  const [allCategory, setAllCategory] = useState([]);
+
+
+
   const params = useParams()
   console.log(params.id);
   useEffect(() => {
@@ -52,18 +55,6 @@ const EditBlog = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const handleOgImage = (e) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setDefaulImage2(reader.result);
-        setOgImage(e.target.files[0]);
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
-
-  };
 
   const handleChange = (e) => {
     setValue(e);
@@ -73,9 +64,7 @@ const EditBlog = () => {
   };
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const combinedImages = [image,ogImage];
-    console.log(combinedImages);
-        
+    
     const formData = new FormData();
     formData.append("mainheading", heading);
     formData.append("maincontent", content);
@@ -85,25 +74,22 @@ const EditBlog = () => {
     formData.append("meta_title", metaTitle);
     formData.append("url", url);
     formData.append("image", image);
-    formData.append("image", ogImage);
     formData.append("category", selectedOption);
     console.log(...formData);
 
     try {
       await dispatch(UpdateBlogs(params.id, formData));
       navigator('/allblogs'); // Use React Router to navigate without a full page reload
+      handleCategory()
     } catch (error) {
       console.error('Error updating new blog:', error);
     }
-
-    //const res=axios.post("http://localhost:4000/api/blog/newblog",formData,{ withCredentials: true })
   };
 
   useEffect(() => {
     if (Singleblog) {
       setSelectedOption(Singleblog.category)
       setDefaulImage(Singleblog.imageurl)
-      setDefaulImage2(Singleblog.ogImage)
       setHeading(Singleblog.mainheading)
       setContent(Singleblog.maincontent)
       setMetaTitle(Singleblog.meta_title)
@@ -116,7 +102,37 @@ const EditBlog = () => {
 
   console.log(Singleblog);
 
+  const handleCategory = async () => {
 
+    try {
+      const { category } = await axios.post("http://localhost:4000/api/blog/create-category", { "category": selectedOption }, { withCredentials: true })
+
+      console.log();
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  const getAllCategory = async () => {
+
+    try {
+      const { data } = await axios.get("http://localhost:4000/api/blog/get-category")
+
+      setAllCategory(data.value)
+
+    } catch {
+
+      toast.error("Already have category")
+
+    }
+
+  }
+
+  useEffect(() => {
+    getAllCategory()
+  }, [])
 
   return (
     <div className="home" style={{ display: "flex", width: "100%" }}>
@@ -130,26 +146,38 @@ const EditBlog = () => {
               {<img src={image ? defaultImage : defaultImage} alt="" />}
             </label>
             <input type="file" onChange={handleImage} name="image" id="image" style={{ display: 'none' }} />
-            <div className="Input_title_2">Select a Og Image</div>
-            <label htmlFor="ogImage" className="custom-file-input">
-              {<img src={image ? defaultImage2 : defaultImage2} alt="" />}
-            </label>
-            <input type="file" onChange={handleOgImage} name="ogImage" id="ogImage" style={{ display: 'none' }} />
             <div className="input_option">
               <div className="Input_title">Category</div>
               <select className="select_input" value={selectedOption} onChange={handleOptionChange}>
                 <option value="">Select page</option>
-                <option value="DeFi">
-                  DeFi
-                </option>
-                <option value="Web3">
-                  Web3
-                </option>
-                <option value="Web">
-                  Web
-                </option>
+                {
+                  allCategory.map((item) => {
+                    return <option value={item}>{item}</option>
+                  })
+                }
               </select>
               <div className="main_content">
+              {selectedOption ? (
+                  <>
+                    <div className="Input_title_2">Create a Category</div>
+                    <input
+                      className="blog_input"
+                      type="text"
+                      value={selectedOption}
+                      onChange={(e) => setSelectedOption(e.target.value)}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <div className="Input_title_2">Create a Category</div>
+                    <input
+                      className="blog_input"
+                      type="text"
+                      value={selectedOption}
+                      onChange={(e) => setSelectedOption(e.target.value)}
+                    />
+                  </>
+                )}
                 <div className="Input_title_2">Blog Title</div>
                 <input
                   className="blog_input"

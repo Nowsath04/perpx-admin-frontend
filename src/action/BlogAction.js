@@ -2,8 +2,8 @@ import axios from "axios"
 import { AllblogLoading, AllblogSuccess, Allblogfail, GetSingleblogLoading, GetSingleblogSuccess, GetSingleblogfail, UpdateblogCreateLoading, UpdateblogCreateSuccess, blogCreateLoading, blogCreateSuccess, blogCreatefail,DeleteBlogLoading,DeleteBlogSuccess,DeleteBlogFail } from "../slices/blogSlices"
 import { toast } from "react-toastify"
 
-const baseurl = "https://perpx.onrender.com/api"
-// const baseurl= "http://localhost:4000/api"
+// const baseurl = "https://perpx.onrender.com/api"
+const baseurl= "http://localhost:4000/api"
 // const baseurl= "https://perpx.finance/adminfunc/api"
 
 export const CreateNewBlogs = (blogdata) => async (dispatch) => {
