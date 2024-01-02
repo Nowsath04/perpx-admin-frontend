@@ -3,8 +3,8 @@ import { toast } from "react-toastify"
 import {UpdateblogCreatefail,UpdatepageCreateLoading,UpdatepageCreateSuccess,GetSinglepageLoading,GetSinglepageSuccess,GetSinglepagefail,pageCreateLoading, pageCreateSuccess, pageCreatefail,AllpageLoading, AllpageSuccess, Allpagefail} from "../slices/pageSlice"
 
 
-const baseurl = "https://perpx.onrender.com/api"
-// const baseurl= "http://localhost:4000/api"
+// const baseurl = "https://perpx.onrender.com/api"
+const baseurl= "http://localhost:4000/api"
 // const baseurl= "https://perpx.finance/adminfunc/api"
 
 export const CreateNewPages = (Pagedata) => async (dispatch) => {

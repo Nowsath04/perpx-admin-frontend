@@ -3,8 +3,8 @@ import { AuthError, AuthRegister, AuthRequest, Authsuccess, LoadinUserError, Loa
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
 
-const baseurl = "https://perpx.onrender.com/api"
-// const baseurl= "http://localhost:4000/api"
+// const baseurl = "https://perpx.onrender.com/api"
+const baseurl= "http://localhost:4000/api"
 // const baseurl= "https://perpx.finance/adminfunc/api"
 
 
